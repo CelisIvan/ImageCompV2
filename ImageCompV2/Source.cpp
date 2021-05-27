@@ -4,6 +4,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include <string.h>
 
 #include "CompareImageCUDA.h"
 
@@ -12,15 +13,21 @@ using namespace cv;
 
 int main() {
 
-
+	string imag1, imag2;
 	int res;
 	cout << "Select a comparisson option:\n1. Hard\n2.Shape" << endl;
 	cin >> res;
+	cout << "Image1 name(png): " << endl;
+	cin >> imag1;
 
+	cout << "Image2 name: (png) " << endl;
+	cin >> imag2;
+
+	Mat inputImage = imread(imag1);
+	Mat inputImage2 = imread(imag2);
 
 	if (res == 1) {
-		Mat inputImage = imread("Testimg.png");
-		Mat inputImage2 = imread("Testimg2.png");
+		
 		Mat diffImage = inputImage.clone();
 		cout << "Height: " << inputImage.rows << "\nWIDTH: " << inputImage.cols << endl;
 
@@ -30,8 +37,6 @@ int main() {
 		system("pause");
 	}
 	else {
-		Mat inputImage = imread("TestimgS.png");
-		Mat inputImage2 = imread("TestimgS2.png");
 		Mat imgGrayscale;        // grayscale of input image
 		Mat imgBlurred;            // intermediate blured image
 		Mat imgCanny;
